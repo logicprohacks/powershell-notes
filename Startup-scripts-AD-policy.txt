@@ -1,0 +1,13 @@
+"https://serverfault.com/questions/1067350/script-not-running-on-startup-for-gpo"
+
+Startup Scripts enabled in "Computer Configuration" is executed by the System even before anyone is logged in.
+
+This is typically not interactive (you can add scripts to cleanup certain directories, or configure something on the computer, but you can't start an end-user application here, the app will not show but may be running in the background).
+
+It's better to configured the Logon Script in "User Configuration" because the scripts here are executed in the user's context, however, since Windows 8.1 the Logon Scripts don't run for five minutes after a user logs on. This is by design to speed up the loading of the user's desktop. 
+
+Note: If you want the logon scripts to run at user logon without any delay, you should configure the Configure Logon Script Delay setting to Disabled in the Computer Configuration\Administrative Templates\System\Group Policy location.
+
+But, still, this is not the preferred way of achieving what you want, as Microsoft says:
+
+This mechanism allows administrators to perform various maintenance and management tasks on client computers, including (but not limited to) collecting diagnostic information, invoking security scans, cleaning or resetting system state, and installing tools.
